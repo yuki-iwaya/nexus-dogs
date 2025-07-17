@@ -112,6 +112,18 @@ init.sql
 docker-compose down
 docker volume rm <プロジェクト名>_mysql_volume
 docker-compose up --build
+docker exec -it nexus-dogs-java bash
 ```
 
+### ローカルホストで確認
+http://localhost:8080/
+
+### ユーザ登録テスト
+```
+curl -X POST http://localhost:8080/api/v1/users -H "Content-Type: application/json" -d '{"username":"testuser","password":"password123","email":"test@example.com"}'
+
+Invoke-WebRequest -Uri http://localhost:8080/api/v1/users -H "Content-Type: application/json" -d '{"username":"testuser","password":"password123","email":"test@example.com"}'
+
+
+```
 ---
