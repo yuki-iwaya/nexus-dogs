@@ -2,12 +2,12 @@ package com.github.yuki.iwaya.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.github.yuki.iwaya.config.PasswordEncoderConfig;
-import com.github.yuki.iwaya.dto.UserDto.UserRequest;
-import com.github.yuki.iwaya.dto.UserDto.UserResponse;
 import com.github.yuki.iwaya.model.User;
+import com.github.yuki.iwaya.model.UserRequestModel.UserRequest;
+import com.github.yuki.iwaya.model.UserResponseModel.UserResponse;
 import com.github.yuki.iwaya.repository.UserRepository;
 
 @Service
@@ -17,19 +17,21 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoderConfig passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public UserResponse register(UserRequest request){
+        
         if(userRepository.existsByUsername(request.getUsername())){
             throw new RuntimeException("exists by username");
         }
+
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("exist by email");
         }
 
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.passwordEncoder().encode(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
 
         User saved = userRepository.save(user);
@@ -40,4 +42,17 @@ public class UserService {
         response.setEmail(saved.getEmail());
         return response;
     }
+
+    public User getUser(String username, String password){
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        return user;
+    }
+
+    public User getUserById(Long Id){
+
+        User user = userRepository.findById(Id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
+    }
+
 }

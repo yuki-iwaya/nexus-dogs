@@ -120,10 +120,14 @@ http://localhost:8080/
 
 ### ユーザ登録テスト
 ```
-curl -X POST http://localhost:8080/api/v1/users -H "Content-Type: application/json" -d '{"username":"testuser","password":"password123","email":"test@example.com"}'
-
-Invoke-WebRequest -Uri http://localhost:8080/api/v1/users -H "Content-Type: application/json" -d '{"username":"testuser","password":"password123","email":"test@example.com"}'
-
-
+Invoke-WebRequest -Uri http://localhost:8080/api/v1/users -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"username":"20250723user","password":"password123","email":"20250723user@example.com"}'
+```
+### ユーザ取得テスト
+```
+Invoke-WebRequest -Uri "http://localhost:8080/api/v1/users/1" -Method GET
+```
+### ユーザログインテスト
+```
+Invoke-WebRequest -Uri http://localhost:8080/api/v1/login -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"username":"20250723user","password":"password123"}'
 ```
 ---
