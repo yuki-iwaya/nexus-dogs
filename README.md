@@ -128,6 +128,6 @@ Invoke-WebRequest -Uri "http://localhost:8080/api/v1/users/1" -Method GET
 ```
 ### ユーザログインテスト
 ```
-Invoke-WebRequest -Uri http://localhost:8080/api/v1/login -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"username":"20250723user","password":"password123"}'
+Invoke-WebRequest -Uri http://localhost:8080/api/v1/login -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"email":"20250723user@example.com","password":"password123"}'
 ```
 ---
