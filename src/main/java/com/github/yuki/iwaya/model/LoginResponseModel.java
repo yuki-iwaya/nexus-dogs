@@ -7,7 +7,7 @@ public class LoginResponseModel {
     @Data
     public static class LoginResponse {
         private String token;
-        private String message;
+        private String username;
     }
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/v1/login")
+@RequestMapping("/api/v1")
 public class LoginController {
 
     @Autowired
@@ -25,18 +25,18 @@ public class LoginController {
     @Autowired
     private JwtProducer jwtProducer;
     
-    
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> postMethodName(@RequestBody LoginRequest loginRequest) {
     
-        User user = userService.getUser(loginRequest.getUsername(), loginRequest.getPassword());
+        User user = userService.getUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (user == null) {
+            System.out.println("Not found user");
             return null;
         }
 
-        String token = jwtProducer.createToken(loginRequest.getUsername());
+        String token = jwtProducer.createToken(user.getUsername());
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setMessage("Success");
+        loginResponse.setUsername(user.getUsername());
         loginResponse.setToken(token);
 
         return ResponseEntity.ok(loginResponse);

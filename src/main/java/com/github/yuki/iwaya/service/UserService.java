@@ -43,9 +43,13 @@ public class UserService {
         return response;
     }
 
-    public User getUser(String username, String password){
-        User user = userRepository.findByUsernameAndPassword(username, password);
-        return user;
+    public User getUser(String email, String password){
+        User user = userRepository.findByEmail(email);
+        System.out.println(password + " : " + user.getPassword());
+        if(user != null && passwordEncoder.matches(password, user.getPassword())){
+            return user;
+        }
+        return null;
     }
 
     public User getUserById(Long Id){
