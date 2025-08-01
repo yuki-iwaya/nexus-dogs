@@ -8,6 +8,7 @@ public class UserRequestModel {
         private String username;
         private String password;
         private String email;
+        private User.Role role;
     }
 
 }

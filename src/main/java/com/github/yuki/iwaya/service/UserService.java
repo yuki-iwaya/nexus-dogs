@@ -33,6 +33,7 @@ public class UserService {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
+        user.setRole(request.getRole());
 
         User saved = userRepository.save(user);
 
@@ -40,6 +41,7 @@ public class UserService {
         response.setId(saved.getId());
         response.setUsername(saved.getUsername());
         response.setEmail(saved.getEmail());
+        response.setRole(saved.getRole());
         return response;
     }
 
@@ -53,7 +55,6 @@ public class UserService {
     }
 
     public User getUserById(Long Id){
-
         User user = userRepository.findById(Id)
             .orElseThrow(() -> new RuntimeException("User not found"));
         return user;

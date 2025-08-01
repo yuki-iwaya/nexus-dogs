@@ -26,16 +26,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser (@RequestBody UserRequest request) {
-        
         UserResponse response = userService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public User getUsersById(@PathVariable Long id) {
-        
+    public User getUsersById(@PathVariable Long id) {        
         return userService.getUserById(id);
 
     }
