@@ -34,6 +34,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	// JSON
+	implementation 'org.json:json:20240303'
+
 	// MySQL
 	implementation 'mysql:mysql-connector-java:8.0.33'
 
@@ -44,11 +47,12 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-web:6.5.1'
 
 	// AWS
-	implementation(platform("software.amazon.awssdk:bom:2.20.56"))
-    implementation("software.amazon.awssdk:s3")
-    implementation("software.amazon.awssdk:sso")
-    implementation("software.amazon.awssdk:ssooidc")
-	implementation("software.amazon.awssdk:bedrock")
+	implementation("software.amazon.awssdk:s3:2.20.160")
+	implementation("software.amazon.awssdk:sso:2.20.160")
+	implementation("software.amazon.awssdk:ssooidc:2.20.160")
+	implementation("software.amazon.awssdk:bedrock:2.20.160")
+	implementation("software.amazon.awssdk:bedrockruntime:2.20.160")
+
 
 	// Log4j
 	implementation 'ch.qos.logback:logback-classic'
